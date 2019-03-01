@@ -13,6 +13,8 @@ import java.util.Comparator;
 import it.unibo.ai.beliefobjects.Belief;
 import it.unibo.ai.beliefobjects.IReply;
 
+import org.nlogo.api.MersenneTwisterFast;
+
 /**
  * @author Daniela Loreti
  * The strategy selects to utter a limited number (maxUtterablePerTurn) of sentences from a collection of agent's believes.

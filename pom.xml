@@ -5,11 +5,15 @@
   <version>0.0.1-SNAPSHOT</version>
   
   <repositories>
-        <repository>
+         <repository>
             <id>central</id>
             <name>Maven central</name>
             <url>http://repo1.maven.org/maven2</url>
-        </repository>
+        </repository> 
+        <repository>
+      <id>my-alternate-repository</id>
+      <url>https://dl.bintray.com/netlogo/NetLogo-JVM/</url>
+    </repository>
     </repositories>
   
   
@@ -33,17 +37,25 @@
 	 </dependency>
   	
      
-    <!-- <dependency>
-      <groupId>asp4j</groupId>
-      <artifactId>asp4j</artifactId>
-      <version>0.0.5</version>
-    </dependency> -->
+		<!--  <dependency>
+		   <groupId>org.nlogo</groupId>
+		    <artifactId>netlogo</artifactId>
+		    <version>6.0.1</version>
+		</dependency>-->
+     <!-- https://mvnrepository.com/artifact/org.nlogo/netlogo -->
+		<dependency>
+		    <groupId>org.nlogo</groupId>
+		    <artifactId>netlogo</artifactId>
+		    <version>6.0.4-9328ba6</version>
+		</dependency>
+
      
   </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    
     
     
 </project>

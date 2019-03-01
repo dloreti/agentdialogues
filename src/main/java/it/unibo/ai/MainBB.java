@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.nlogo.api.MersenneTwisterFast;
 
 //import org.apache.log4j.BasicConfigurator;
 //import org.apache.log4j.Logger;
@@ -40,11 +41,9 @@ import it.unibo.ai.strategies.AllUtterablesUtteringStrategy;
 import it.unibo.ai.strategies.FirstOneUnderstandingStrategy;
 import it.unibo.ai.strategies.IUnderstandingStrategy;
 import it.unibo.ai.strategies.IUtteringStrategy;
-import it.unibo.ai.strategies.MersenneTwisterFast;
 import it.unibo.ai.strategies.RandomUnderstandingStrategy;
 import it.unibo.ai.strategies.ReplayPreferredAllUtteringStrategy;
 import it.unibo.ai.strategies.SilentConditionUtteringStrategy;
-
 /**
  * @author Daniela Loreti
  * This main simulate 9 batball dialogues between pairs of the three agents: X, Y and Z. 

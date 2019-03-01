@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import it.unibo.ai.beliefobjects.Understood;
 import java.util.Random;
 
+import org.nlogo.api.MersenneTwisterFast;
+
 /**
  * @author Daniela Loreti
  * The strategy randomly selects a random number of sentences from a collection of believes.

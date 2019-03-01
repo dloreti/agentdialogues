@@ -1,6 +1,9 @@
 package it.unibo.ai.strategies;
 
 import java.util.List;
+
+import org.nlogo.api.MersenneTwisterFast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
