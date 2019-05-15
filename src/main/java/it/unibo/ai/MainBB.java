@@ -43,7 +43,7 @@ import it.unibo.ai.strategies.IUnderstandingStrategy;
 import it.unibo.ai.strategies.IUtteringStrategy;
 import it.unibo.ai.strategies.RandomUnderstandingStrategy;
 import it.unibo.ai.strategies.ReplayPreferredAllUtteringStrategy;
-import it.unibo.ai.strategies.SilentConditionUtteringStrategy;
+import it.unibo.ai.strategies.ProgressivelyMoreStubbornUtteringStrategy;
 /**
  * @author Daniela Loreti
  * This main simulate 9 batball dialogues between pairs of the three agents: X, Y and Z. 
@@ -123,9 +123,9 @@ public class MainBB  {
 					understandingStrategyB = new FirstOneUnderstandingStrategy();
 					 maxGiveAndTake = 10;
 				}else if (condition==Dialogue.CONDITION.SILENT) {
-					utteringStrategyA = new SilentConditionUtteringStrategy(ps.getPossibleAnswers(),null, 0, r);
+					utteringStrategyA = new ProgressivelyMoreStubbornUtteringStrategy(ps.getPossibleAnswers(),null, 0, r);
 					understandingStrategyA = new FirstOneUnderstandingStrategy();
-					utteringStrategyB = new SilentConditionUtteringStrategy(ps.getPossibleAnswers(),null, 0, r);
+					utteringStrategyB = new ProgressivelyMoreStubbornUtteringStrategy(ps.getPossibleAnswers(),null, 0, r);
 					understandingStrategyB = new FirstOneUnderstandingStrategy();
 					 maxGiveAndTake = 1;
 				}

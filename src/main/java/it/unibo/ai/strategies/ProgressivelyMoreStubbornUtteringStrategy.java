@@ -16,7 +16,7 @@ import it.unibo.ai.beliefobjects.Belief;
  * The strategy selects to utter a limited number (maxUtterablePerTurn) of sentences from a collection of agent's believes.
  *
  */
-public class SilentConditionUtteringStrategy implements IUtteringStrategy{
+public class ProgressivelyMoreStubbornUtteringStrategy implements IUtteringStrategy{
 
 	private List<String> answers;
 	private MersenneTwisterFast random;
@@ -25,7 +25,7 @@ public class SilentConditionUtteringStrategy implements IUtteringStrategy{
 	private int counter;
 
 
-	public SilentConditionUtteringStrategy(List<String> answers, String last_uttered, int counter, MersenneTwisterFast random){
+	public ProgressivelyMoreStubbornUtteringStrategy(List<String> answers, String last_uttered, int counter, MersenneTwisterFast random){
 		this.answers = answers;
 		this.random=random;
 		this.last_uttered=last_uttered; // should be null at the first interaction
