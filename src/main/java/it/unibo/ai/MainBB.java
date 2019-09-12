@@ -148,7 +148,7 @@ public class MainBB  {
 					Dialogue d = new Dialogue(condition,One,Two,maxGiveAndTake,ps);
 					d.startDialogue();
 				} catch (SolverException e) {
-					e.printStackTrace();
+					logger.error("",e);
 				}
 			}
 		}

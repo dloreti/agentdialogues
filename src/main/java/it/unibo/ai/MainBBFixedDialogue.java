@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import asp4j.solver.ReasoningMode;
 import asp4j.solver.SolverClingo;
 import asp4j.solver.SolverException;
@@ -40,7 +43,8 @@ public class MainBBFixedDialogue  {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException{
-
+		Logger logger = LogManager.getLogger("agentdialogues");
+		
 		if (args.length==0){
 			System.out.println("Usage: \n"
 					+ "/path/to/clingorulefile.lp");
@@ -147,7 +151,7 @@ public class MainBBFixedDialogue  {
 			}
 			
 		} catch (SolverException e) {
-			e.printStackTrace();
+			logger.error("",e);
 		}
 
 

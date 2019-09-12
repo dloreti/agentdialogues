@@ -2,6 +2,8 @@ package it.unibo.ai.strategies;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.nlogo.api.MersenneTwisterFast;
 
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public class PeerPressureUtteringStrategy implements IUtteringStrategy{
 
 	@Override
 	public List<String> selectiveUtter(List<Belief> believes){
+		Logger logger = LogManager.getLogger("agentdialogues");
 		counter++; //counter is increased each time I'm requested to provide an answer
 		List<String> utters = new ArrayList<String>();
 
@@ -71,23 +74,23 @@ public class PeerPressureUtteringStrategy implements IUtteringStrategy{
 			if (last_uttered == null && neighAsws.size()==0) {
 				last_uttered = random.nextBoolean() ? utters.get(0) : utters.get(1);
 			}else {
-				for (String string : neighAsws) {
-					if (string==utters.get(0)) nAns0++;
-					else if (string==utters.get(1)) nAns1++;
+				for (String str : neighAsws) {
+					if (str.equals(utters.get(0)) ) nAns0++;
+					else if (str.equals(utters.get(1)) ) nAns1++;
 				}
-				if (last_uttered==utters.get(0)) nAns0++;
-				else if (last_uttered==utters.get(1)) nAns1++;
+				if (last_uttered.equals(utters.get(0))) nAns0++;
+				else if (last_uttered.equals(utters.get(1)) ) nAns1++;
 				
 				if (nAns0>nAns1)  last_uttered = utters.get(0);
-				else last_uttered = utters.get(1);
-				
+				else if (nAns0<nAns1) last_uttered = utters.get(1);
+				//else if the number of a and b is the same, I stay with my last answer
+				logger.debug("nAns0("+utters.get(0)+")="+nAns0+" nAns1("+utters.get(1)+")="+nAns1+" so I say:"+last_uttered);
 			}
 		}else {
 			try {
 				throw new Exception("Problems with more than 2 possible answers are not modelled yet.");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("",e);
 			}
 		}
 		return Arrays.asList(last_uttered); 

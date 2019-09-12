@@ -2,6 +2,8 @@ package it.unibo.ai.strategies;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.nlogo.api.MersenneTwisterFast;
 
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class ProgressivelyMoreStubbornUtteringStrategy implements IUtteringStrat
 
 	@Override
 	public List<String> selectiveUtter(List<Belief> believes){
+		Logger logger = LogManager.getLogger("agentdialogues");
 		counter++; //counter is increased each time I'm requested to provide an answer
 		List<String> utters = new ArrayList<String>();
 
@@ -87,8 +90,7 @@ public class ProgressivelyMoreStubbornUtteringStrategy implements IUtteringStrat
 			try {
 				throw new Exception("Problems with more than 2 possible answers are not modelled yet.");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("",e);
 			}
 		}
 		return Arrays.asList(last_uttered); 
