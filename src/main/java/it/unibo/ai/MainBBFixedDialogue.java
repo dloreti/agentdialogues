@@ -38,8 +38,7 @@ import it.unibo.ai.strategies.AllUtterablesUtteringStrategy;
  *
  */
 public class MainBBFixedDialogue  {
-	private static String rulefile_clingo; 
-
+	
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException{
@@ -47,12 +46,14 @@ public class MainBBFixedDialogue  {
 		
 		if (args.length==0){
 			System.out.println("Usage: \n"
-					+ "/path/to/clingorulefile.lp");
+					+ "/path/to/clingorulefile1.lp [/path/to/clingorulefile2.lp ...]");
 		}
 
 		int maxUtterablePerTurn = 6;
 		
-		rulefile_clingo=args[0];
+		List<String> rulefiles = new ArrayList<>();
+		rulefiles.add(MainBB.class.getResource(args[0]).getPath());
+		rulefiles.add(MainBB.class.getResource(args[1]).getPath());
 
 		ProblemSentences ps = new BatBallSentences(BatBallSentences.ORDERING.CONCLUSION_FIRST);
 		ps.buildExample();
@@ -98,7 +99,7 @@ public class MainBBFixedDialogue  {
 						new AllUtterablesUtteringStrategy(maxUtterablePerTurn, ps.getSentenceComparator()),
 						new AllUnderstandingStrategy()
 						),
-				rulefile_clingo, ReasoningMode.CAUTIOUS, filter, solver
+				rulefiles, ReasoningMode.CAUTIOUS, filter, solver
 				);
 		Agent agentY = new Agent("Y", 
 				new AgentBeliefCollection(
@@ -106,7 +107,7 @@ public class MainBBFixedDialogue  {
 						new AllUtterablesUtteringStrategy(maxUtterablePerTurn, ps.getSentenceComparator()),
 						new AllUnderstandingStrategy()
 						),
-				rulefile_clingo, ReasoningMode.CAUTIOUS, filter, solver
+				rulefiles, ReasoningMode.CAUTIOUS, filter, solver
 				);
 		try {
 			System.out.println("\n*********** DIALOGUE X - Y :");

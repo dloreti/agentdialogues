@@ -20,6 +20,6 @@ public class NotBelieved extends SingleSentenceBelief{
 
 	@Override
 	public Boolean isUtterable() {
-		return true;
+		return false;
 	}
 }

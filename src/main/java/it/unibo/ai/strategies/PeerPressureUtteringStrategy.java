@@ -78,8 +78,8 @@ public class PeerPressureUtteringStrategy implements IUtteringStrategy{
 					if (str.equals(utters.get(0)) ) nAns0++;
 					else if (str.equals(utters.get(1)) ) nAns1++;
 				}
-				if (last_uttered.equals(utters.get(0))) nAns0++;
-				else if (last_uttered.equals(utters.get(1)) ) nAns1++;
+				if (last_uttered.equals(utters.get(0))) nAns0++; //nAns0+=neighAsws.size();//
+				else if (last_uttered.equals(utters.get(1)) ) nAns1++; //nAns1+=neighAsws.size();
 				
 				if (nAns0>nAns1)  last_uttered = utters.get(0);
 				else if (nAns0<nAns1) last_uttered = utters.get(1);

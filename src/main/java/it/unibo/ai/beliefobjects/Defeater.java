@@ -6,16 +6,20 @@ import asp4j.mapping.annotations.Arg;
 import asp4j.mapping.annotations.DefAtom;
 
 
-@DefAtom("con")
+@DefAtom("def")
 public class Defeater extends Belief{
 	
 	public Defeater(){}
 
 	public Defeater(String defeater, String reasoning, String defeated) {
-		super(new ArrayList<String>());
+		super();
+		this.setDefeater(defeater);
+		this.setReasoning(reasoning);
+		this.setDefeated(defeated);
+		/*super(new ArrayList<String>());
 		this.getSentences().set(0, defeater);
 		this.getSentences().set(1, reasoning);
-		this.getSentences().set(2, defeated);
+		this.getSentences().set(2, defeated);*/
 	}
 	
 	@Arg(0)
@@ -63,7 +67,7 @@ public class Defeater extends Belief{
 	
 	@Override
 	public String toString() {
-		return "arg("+getDefeater()+","+getReasoning()+","+getDefeated()+")";
+		return "def("+getDefeater()+","+getReasoning()+","+getDefeated()+")";
 	}
 
 	@Override

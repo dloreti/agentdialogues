@@ -39,8 +39,10 @@ public class Dialogue {
 
 	private void silenceDialogue() throws SolverException{
 		Logger logger = LogManager.getLogger("agentdialogues");
+		System.out.println("before "+agent1.getName()+" thinks: "+agent1);
 		agent1.think();
 		logger.info("Beginning "+agent1.getName()+" Type="+ps.checkAgentType(agent1)+" thinks: "+agent1+ " claims: "+ps.getAgentClaimNL(agent1));
+		System.out.println("before "+agent2.getName()+" thinks: "+agent2);
 		agent2.think();
 		logger.info("Beginning "+agent2.getName()+" Type="+ps.checkAgentType(agent2)+" thinks: "+agent2+ " claims: "+ps.getAgentClaimNL(agent2));
 
@@ -53,8 +55,8 @@ public class Dialogue {
 			List<String> utteredByB = agent2.selectiveUtter();
 			
 			List<Understood> understoodByB = agent2.selectiveUnderstand(utteredByA);
-			String s = "GT "+i+" "+agent2.getName()+" understands: ";
-			//System.out.println("GT "+i+" "+agent2.getName()+" understands: ");//+ understoodByB);
+			//String s = "GT "+i+" "+agent2.getName()+" understands: ";
+			String s = "GT "+i+" "+agent1.getName()+" says (actually "+agent2.getName()+" understands): ";
 			List<String> t = new ArrayList<String>();
 			for (Understood u : understoodByB) {
 				t.add(u.getSentenceId());
@@ -68,8 +70,8 @@ public class Dialogue {
 			//System.out.println("GT "+i+" "+agent2.getName()+" thinks: "+agent2+ " claims: "+ps.getAgentClaimNL(agent2));	
 			
 			List<Understood> understoodByA = agent1.selectiveUnderstand(utteredByB);
-			//System.out.println("GT "+i+" "+agent1.getName()+" understands: ");
-			s = "GT "+i+" "+agent1.getName()+" understands: ";
+			//s = "GT "+i+" "+agent1.getName()+" understands: ";
+			s = "GT "+i+" "+agent2.getName()+" says (actually "+agent1.getName()+" understands): ";
 			t = new ArrayList<String>();
 			for (Understood u : understoodByA) {
 				t.add(u.getSentenceId());
@@ -108,7 +110,8 @@ public class Dialogue {
 			});*/
 
 			List<Understood> understoodByB = agent2.selectiveUnderstand(utteredByA);
-			String s = "GT "+i+" "+agent2.getName()+" understands: ";
+			//String s = "GT "+i+" "+agent2.getName()+" understands: ";
+			String s = "GT "+i+" "+agent1.getName()+" says (actually "+agent2.getName()+" understands): ";
 			List<String> t = new ArrayList<String>();
 			for (Understood u : understoodByB) {
 				t.add(u.getSentenceId());
@@ -132,7 +135,8 @@ public class Dialogue {
 
 
 			List<Understood> understoodByA = agent1.selectiveUnderstand(utteredByB);
-			s = "GT "+i+" "+agent1.getName()+" understands: ";
+			//s = "GT "+i+" "+agent1.getName()+" understands: ";
+			s = "GT "+i+" "+agent2.getName()+" says (actually "+agent1.getName()+" understands): ";
 			t = new ArrayList<String>();
 			for (Understood u : understoodByA) {
 				t.add(u.getSentenceId());
@@ -142,7 +146,7 @@ public class Dialogue {
 				s+="\n\t"+x+": "+ps.getSentences().get(x).getHumanReadable(); 
 			}
 			logger.info(s);
-			logger.info("GT "+i+" "+agent1.getName()+" Type="+ps.checkAgentType(agent2)+" thinks: "+agent1+ " claims: "+ps.getAgentClaimNL(agent1));	
+			logger.info("GT "+i+" "+agent1.getName()+" Type="+ps.checkAgentType(agent1)+" thinks: "+agent1+ " claims: "+ps.getAgentClaimNL(agent1));	
 
 			String res = ps.checkStopTalking(agent1, agent2, condition);
 			if (res != null){

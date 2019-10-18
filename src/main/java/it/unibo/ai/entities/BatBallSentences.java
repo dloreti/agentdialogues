@@ -1,47 +1,28 @@
 package it.unibo.ai.entities;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
-import it.unibo.ai.beliefobjects.Agree;
 import it.unibo.ai.beliefobjects.Applicable;
 import it.unibo.ai.beliefobjects.Belief;
 import it.unibo.ai.beliefobjects.Believed;
 
 public class BatBallSentences extends ProblemSentences{
 
-	public enum ORDERING { ARGUMENT_FIRST, CONCLUSION_FIRST };
-
+	
 	private final List<String> ARGUMENT_FIRST_ORDERING = Arrays.asList(
 			"i","e","b","f","a","d","u","c");
 	private final List<String> CONCLUSION_FIRST_ORDERING = Arrays.asList(
 			"b","e","a","f","c","d","u","i");
-	private List<String> ORDERED_ENTRIES;
-
-	private List<String> possibleAnswers = Arrays.asList("b","a");
+	
 
 	public BatBallSentences(ORDERING ordering) {
 		super();
+		this.possibleAnswers = Arrays.asList("b","a");
 		if (ordering==ORDERING.ARGUMENT_FIRST)
 			ORDERED_ENTRIES=ARGUMENT_FIRST_ORDERING;
 		else
 			ORDERED_ENTRIES=CONCLUSION_FIRST_ORDERING;
-
-		this.setSentenceComparator(new Comparator<String>(){
-			@Override
-			public int compare(String o1, String o2) {
-				if (ORDERED_ENTRIES.contains(o1) && ORDERED_ENTRIES.contains(o2)) 
-					// Both objects are in our ordered list. Compare them by their position in the list
-					return ORDERED_ENTRIES.indexOf(o1) - ORDERED_ENTRIES.indexOf(o2);
-				if (ORDERED_ENTRIES.contains(o1)) // o1 is in the ordered list, but o2 isn't. o1 is smaller (i.e. first)
-					return -1;
-				if (ORDERED_ENTRIES.contains(o2)) // o2 is in the ordered list, but o1 isn't. o2 is smaller (i.e. first)
-					return 1;
-				return o1.toString().compareTo(o2.toString()); //not sure if correct
-			}
-		});
 	}
 
 	public void buildExample(){
@@ -91,15 +72,7 @@ public class BatBallSentences extends ProblemSentences{
 		}
 		return null;
 	}
-
-	/*public enum BBAgentType {
-		X, //the agent that has the wrong intuitive answer (75% of the total agents)
-		Y, //the agent that has the correct answer (20%)
-		Z, //the agent that has the correct answer but did not really understand the problem (5%)
-		K, //an agent who believes both a and b are correct
-		W; //an agent who only knows that 10c is not a good answer (only knows c)
-	}*/
-
+	
 	@Override
 	public AgentType checkAgentType(Agent a){
 		List<Belief> believes = a.getBeliefCollection().getBelieves();
@@ -114,34 +87,8 @@ public class BatBallSentences extends ProblemSentences{
 			return BBAgentType.Y;
 		if (believes.contains(new Believed("c")) && ! believes.contains(new Believed("a")) )
 			return BBAgentType.W;
-		/*if (believes.contains(new Believed("b")) && believes.contains(new Believed("a")))
-			return BBAgentType.K;
-		if (believes.contains(new Believed("b")) && ! believes.contains(new Believed("a")) )
-			return BBAgentType.X;
-		if (! believes.contains(new Believed("b")) && ! believes.contains(new Believed("c")) && believes.contains(new Believed("a")))
-			return BBAgentType.Z;
-		if (believes.contains(new Believed("a")) && believes.contains(new Believed("c")) ) 
-			return BBAgentType.Y;
-		if (believes.contains(new Believed("c")) && ! believes.contains(new Believed("a")) )
-			return BBAgentType.W;*/
 		return null;
 	}
 	
-
-	public List<String> getAgentClaimNL(Agent a){
-		List<Belief> believes = a.getBeliefCollection().getBelieves();
-		List<String> claims = new ArrayList<>();
-		for (Belief belief : believes) {
-			if (belief instanceof Believed) {
-				if (getPossibleAnswers().contains( ((Believed) belief).getSentenceId()  ) )
-					claims.add(((Believed) belief).getSentenceId());
-			}
-		}
-		return claims;
-	}
-
-	public List<String> getPossibleAnswers() {
-		return possibleAnswers;
-	}
 
 }

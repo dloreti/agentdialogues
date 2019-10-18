@@ -24,12 +24,14 @@ public class Agent {
 	private ObjectSolver solver;
 	
 	public Agent(String name, AgentBeliefCollection agentBeliefCollection ,
-			String rulefile, ReasoningMode reasoningMode,Filter filter, ObjectSolver solver
+			List<String> rulefiles, ReasoningMode reasoningMode,Filter filter, ObjectSolver solver
 			) {
 		super();
 		this.name = name;
 		this.agentBeliefCollection = agentBeliefCollection;
-		this.pb = new ProgramBuilder<Object>().add(new File(rulefile));
+		//this.pb = new ProgramBuilder<Object>().add(new File(rulefile));
+		this.pb = new ProgramBuilder<Object>();
+		rulefiles.forEach(x -> pb.add(new File(x)));
 		this.reasoningMode = reasoningMode;
 		this.filter = filter;
 		this.solver = solver;
@@ -41,18 +43,19 @@ public class Agent {
 
 	public List<Understood> selectiveUnderstand(List<String> utteredSentences) throws SolverException{
 		List<Understood> undList = agentBeliefCollection.selectiveUnderstand(utteredSentences);
-		//forse dovrebbe subito pensare...
 		think(undList);
 		return undList;
 	}
 
 	private void think(List<Understood> understoods) throws SolverException{
-		
-		
+		//pb should already contain only acc and und. No need to clear it. 
+		//The received und becomes a fact and is added to previous acc and und facts to compute novel terms.
 		for (Belief b : understoods) {
 			pb.add(b);
 		}
-		//System.out.println("Agent "+this.name+": solver="+solver+" pb="+pb+" reasoningMode="+reasoningMode+" filter="+filter);
+		
+		//pb.build().getInput().forEach(x -> {System.out.println(((Belief)x));});
+		
 		Set<Object> consequence = solver.getConsequence(pb.build(), reasoningMode, filter);
 		agentBeliefCollection.clearBelieves(); //otherwise the java Agent could still have some bel(x) even if the solver has eliminated it.
 		for (Object object : consequence) {
@@ -65,12 +68,15 @@ public class Agent {
 		for (Belief b : agentBeliefCollection.getBelieves()) {
 			pb.add(b);
 		}
+		//pb.build().getInput().forEach(x -> {System.out.println(((Belief)x));});
+		
 		Set<Object> consequence = solver.getConsequence(pb.build(), reasoningMode, filter);
-		//agentBeliefCollection.clearBelieves(); //otherwise the java Agent could still have some bel(x) even if the solver has eliminated it. //probably not needed
+		//we clear the belief collection although it only contains some facts (acc and und) which must be still present in the consequence set just computed.
+		agentBeliefCollection.clearBelieves(); 
 		for (Object object : consequence) {
-			//System.out.println("Inserting:"+(Belief)object);
 			agentBeliefCollection.insertBelief((Belief)object);
 		}
+		
 	}
 	
 	public String getName() {

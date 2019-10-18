@@ -57,11 +57,11 @@ public class AgentBeliefCollection {
 
 	public List<Understood> selectiveUnderstand(List<String> sentenceIds){
 		List<Understood> newUnderstoods = undestandingStrategy.selectiveUnderstand(sentenceIds);
-		//quanto segue è fatto successivamente anche da agent.think(List<Understood> understoods)
+		/*//quanto segue è fatto successivamente anche da agent.think(List<Understood> understoods)
 		//si può portare qui tutto il codice della agent.think(List<Understood> understoods) e tenere solo una operazione di agent.think() CON clearBelieves!!
 		for (Understood understood : newUnderstoods) { 
 			this.insertBelief(understood);
-		}
+		}*/
 		return newUnderstoods;
 	}
 

@@ -3,7 +3,6 @@ package it.unibo.ai;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,19 +18,23 @@ import asp4j.solver.SolverException;
 import asp4j.solver.object.Filter;
 import asp4j.solver.object.ObjectSolver;
 import asp4j.solver.object.ObjectSolverImpl;
+import it.unibo.ai.beliefobjects.Conflict;
 import it.unibo.ai.beliefobjects.Accessible;
 import it.unibo.ai.beliefobjects.Agree;
 import it.unibo.ai.beliefobjects.Applicable;
+import it.unibo.ai.beliefobjects.Argument;
 import it.unibo.ai.beliefobjects.Because;
 import it.unibo.ai.beliefobjects.Belief;
 import it.unibo.ai.beliefobjects.Believed;
+import it.unibo.ai.beliefobjects.Defeater;
 import it.unibo.ai.beliefobjects.Derived;
+import it.unibo.ai.beliefobjects.NotBelieved;
 import it.unibo.ai.beliefobjects.Rebut;
 import it.unibo.ai.beliefobjects.Undercut;
 import it.unibo.ai.beliefobjects.Understood;
 import it.unibo.ai.entities.Agent;
 import it.unibo.ai.entities.AgentBeliefCollection;
-import it.unibo.ai.entities.BatBallSentences;
+import it.unibo.ai.entities.LindaSentences;
 import it.unibo.ai.entities.Dialogue;
 import it.unibo.ai.entities.ProblemSentences;
 import it.unibo.ai.strategies.FirstOneUnderstandingStrategy;
@@ -46,8 +49,8 @@ import it.unibo.ai.strategies.ProgressivelyMoreStubbornUtteringStrategy;
  * and understands a random subset of what she is told (at least one belief)
  *
  */
-public class MainBB  {
-	
+public class MainLinda  {
+
 	private static final Logger logger = LogManager.getLogger("agentdialogues");
       
 	@SuppressWarnings("unchecked")
@@ -55,18 +58,18 @@ public class MainBB  {
 		Configurator.setLevel("agentdialogues", Level.INFO);
 
 		
-		int maxUtterablePerTurn = 2;
+		int maxUtterablePerTurn = 1;
 		int maxGiveAndTake = 0;
-		Dialogue.CONDITION condition = Dialogue.CONDITION.DISCUSS; //Dialogue.CONDITION.SILENT; // 
+		Dialogue.CONDITION condition = Dialogue.CONDITION.SILENT; // Dialogue.CONDITION.DISCUSS; // 
 		
 
-		ProblemSentences ps = new BatBallSentences(BatBallSentences.ORDERING.CONCLUSION_FIRST);
+		ProblemSentences ps = new LindaSentences(LindaSentences.ORDERING.CONCLUSION_FIRST);
 		ps.buildExample();
 
 		List<String> rulefiles = new ArrayList<>();
 		rulefiles.add(MainBB.class.getResource("/bk.lp").getPath());
-		rulefiles.add(MainBB.class.getResource("/batball.lp").getPath());
-		
+		rulefiles.add(MainBB.class.getResource("/linda.lp").getPath());
+				
 		ObjectSolver solver = new ObjectSolverImpl(new SolverClingo());
 
 		Filter filter = new Filter()
@@ -79,6 +82,11 @@ public class MainBB  {
 				.add(Undercut.class)
 				.add(Because.class)
 				.add(Believed.class);
+				/*.add(Argument.class)
+				.add(Conflict.class)
+				.add(Defeater.class)
+				.add(Derived.class)
+				.add(NotBelieved.class);*/
 
 		/************ AGENTS ****************/
 		MersenneTwisterFast r = new MersenneTwisterFast();
@@ -88,11 +96,10 @@ public class MainBB  {
 		x_i_acc.add(new Accessible("e")); 
 		x_i_acc.add(new Accessible("i"));
 		ArrayList<Belief>  y_i_acc = new ArrayList<Belief>(); 
-		y_i_acc.add(new Accessible("d")); 
 		y_i_acc.add(new Accessible("f")); 
 		y_i_acc.add(new Accessible("i"));
 		ArrayList<Belief>  z_i_acc = new ArrayList<Belief>(); 
-		z_i_acc.add(new Accessible("f"));
+		z_i_acc.add(new Understood("a"));
 		z_i_acc.add(new Accessible("i"));
 		possible_i_acc.add(x_i_acc);
 		possible_i_acc.add(y_i_acc);
