@@ -17,7 +17,10 @@ import org.nlogo.api.MersenneTwisterFast;
 
 /**
  * @author Daniela Loreti
- * The strategy selects to utter a limited number (maxUtterablePerTurn) of sentences from a collection of agent's believes.
+ * Strategy for DISCUSS condition.
+ * The strategy selects to utter all (up to maxUtterablePerTurn) sentences from a collection of agent's believes.
+ * The order in which the sentences are stated depends on the comparator attribute,
+ * but if some rebuttal is in the agent's believes collection, then the sentence in the because is put on top of the list.
  *
  */
 public class ReplayPreferredAllUtteringStrategy implements IUtteringStrategy{

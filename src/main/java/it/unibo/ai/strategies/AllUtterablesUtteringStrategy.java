@@ -9,7 +9,8 @@ import it.unibo.ai.beliefobjects.Belief;
 
 /**
  * @author Daniela Loreti
- * The strategy selects to utter a limited number (maxUtterablePerTurn) of sentences from a collection of agent's believes.
+ * Strategy for DISCUSS condition.
+ * The strategy selects to utter all (up to maxUtterablePerTurn) sentences from a collection of agent's believes.
  *
  */
 public class AllUtterablesUtteringStrategy implements IUtteringStrategy{

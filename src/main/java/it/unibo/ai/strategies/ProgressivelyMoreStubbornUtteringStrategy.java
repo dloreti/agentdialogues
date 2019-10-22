@@ -15,8 +15,10 @@ import it.unibo.ai.beliefobjects.Belief;
 
 /**
  * @author Daniela Loreti
- * The strategy selects to utter a limited number (maxUtterablePerTurn) of sentences from a collection of agent's believes.
- *
+ * Strategy for SILENT condition.
+ * When the agent has one answer, she states that.
+ * When she has more than one, she first selects one randomly. 
+ * Then, in the following iterations she progressively decrease the probability to change her mind.
  */
 public class ProgressivelyMoreStubbornUtteringStrategy implements IUtteringStrategy{
 
@@ -82,7 +84,6 @@ public class ProgressivelyMoreStubbornUtteringStrategy implements IUtteringStrat
 
 				if (changeAnswer) {  
 					//at each interaction I change my answer only if the coin has given true for "counter" times 
-					//System.out.println("CAMBIO IDEA. PRIMA CREDEVO "+last_uttered+" ORA CREDO "+otherAnswer);
 					last_uttered=otherAnswer;
 				}
 			}

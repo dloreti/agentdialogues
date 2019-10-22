@@ -6,7 +6,9 @@ import it.unibo.ai.beliefobjects.Understood;
 
 /**
  * @author Daniela Loreti
- * The understanding strategy selects a all the believes in the list. The agent always understands everything he is told.
+ * Strategy for DISCUSS condition.
+ * Selects all the sentences in the given list.
+ * i.e., the agent always understands everything she is told.
  *
  */
 public class AllUnderstandingStrategy implements IUnderstandingStrategy{

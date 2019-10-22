@@ -15,7 +15,9 @@ import it.unibo.ai.beliefobjects.Belief;
 
 /**
  * @author Daniela Loreti
- * The strategy selects to utter a limited number (maxUtterablePerTurn) of sentences from a collection of agent's believes.
+ * Strategy for SILENT condition.
+ * When the agent has one answer, she states that.
+ * When she has more than one, her answer is influenced by neighbourhood.
  *
  */
 public class PeerPressureUtteringStrategy implements IUtteringStrategy{
@@ -26,10 +28,10 @@ public class PeerPressureUtteringStrategy implements IUtteringStrategy{
 	private String last_uttered;
 	private int counter;
 	
-	private NeighbourhoodHandler neighbourhoodHandler;
+	private INeighbourhoodHandler neighbourhoodHandler;
 
 
-	public PeerPressureUtteringStrategy(List<String> answers, String last_uttered, int counter, MersenneTwisterFast random, NeighbourhoodHandler neighbourhoodHandler){
+	public PeerPressureUtteringStrategy(List<String> answers, String last_uttered, int counter, MersenneTwisterFast random, INeighbourhoodHandler neighbourhoodHandler){
 		this.answers = answers;
 		this.random=random;
 		this.last_uttered=last_uttered; // should be null at the first interaction

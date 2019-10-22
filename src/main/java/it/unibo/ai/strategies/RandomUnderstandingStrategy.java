@@ -9,8 +9,9 @@ import org.nlogo.api.MersenneTwisterFast;
 
 /**
  * @author Daniela Loreti
- * The strategy randomly selects a random number of sentences from a collection of believes.
- * At least one belies in the list is always understood.
+ * Strategy for DISCUSS condition.
+ * Randomly decides how many and which sentences must be understood from the list.
+ * - not used because scarcely plausible -
  *
  */
 public class RandomUnderstandingStrategy implements IUnderstandingStrategy{
