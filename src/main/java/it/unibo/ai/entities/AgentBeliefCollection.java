@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.unibo.ai.beliefobjects.Accessible;
 import it.unibo.ai.beliefobjects.Belief;
+import it.unibo.ai.beliefobjects.Get;
 import it.unibo.ai.beliefobjects.Understood;
 import it.unibo.ai.strategies.IUnderstandingStrategy;
 import it.unibo.ai.strategies.IUtteringStrategy;
@@ -38,7 +39,8 @@ public class AgentBeliefCollection {
 	protected void resetToAccessibleAndUndestood(){
 		List<Belief> believescopy =new ArrayList<Belief>() ;
 		for (Belief belief : believes) {
-			if (belief instanceof Accessible || belief instanceof Understood )
+			if (belief instanceof Accessible || belief instanceof Understood 
+					|| belief instanceof Get)// || belief instanceof Detectable )
 				believescopy.add(belief);
 		}
 		this.setBelieves(believescopy);

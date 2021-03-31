@@ -10,9 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.nlogo.api.MersenneTwisterFast;
 
-//import org.apache.log4j.BasicConfigurator;
-//import org.apache.log4j.Logger;
-
 import asp4j.solver.ReasoningMode;
 import asp4j.solver.SolverClingo;
 import asp4j.solver.SolverException;
@@ -26,6 +23,7 @@ import it.unibo.ai.beliefobjects.Because;
 import it.unibo.ai.beliefobjects.Belief;
 import it.unibo.ai.beliefobjects.Believed;
 import it.unibo.ai.beliefobjects.Derived;
+import it.unibo.ai.beliefobjects.Get;
 import it.unibo.ai.beliefobjects.Rebut;
 import it.unibo.ai.beliefobjects.Undercut;
 import it.unibo.ai.beliefobjects.Understood;
@@ -57,7 +55,7 @@ public class MainBB  {
 		
 		int maxUtterablePerTurn = 2;
 		int maxGiveAndTake = 0;
-		Dialogue.CONDITION condition = Dialogue.CONDITION.DISCUSS; //Dialogue.CONDITION.SILENT; // 
+		Dialogue.CONDITION condition = Dialogue.CONDITION.SILENT; // Dialogue.CONDITION.DISCUSS; // 
 		
 
 		ProblemSentences ps = new BatBallSentences(BatBallSentences.ORDERING.CONCLUSION_FIRST);
@@ -78,7 +76,8 @@ public class MainBB  {
 				.add(Rebut.class)
 				.add(Undercut.class)
 				.add(Because.class)
-				.add(Believed.class);
+				.add(Believed.class)
+				.add(Get.class);
 
 		/************ AGENTS ****************/
 		MersenneTwisterFast r = new MersenneTwisterFast();
@@ -87,6 +86,9 @@ public class MainBB  {
 		ArrayList<Belief>  x_i_acc = new ArrayList<Belief>(); 
 		x_i_acc.add(new Accessible("e")); 
 		x_i_acc.add(new Accessible("i"));
+		// newly added support to discernible arguments
+		x_i_acc.add(new Get("d", "a"));
+		
 		ArrayList<Belief>  y_i_acc = new ArrayList<Belief>(); 
 		y_i_acc.add(new Accessible("d")); 
 		y_i_acc.add(new Accessible("f")); 

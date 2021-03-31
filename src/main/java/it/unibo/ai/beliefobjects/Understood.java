@@ -12,14 +12,6 @@ public class Understood extends SingleSentenceBelief{
 	public Understood(String sentenceId) {
 		super(sentenceId);
 	}
-/*
-	@Arg(0)
-	public String getSentenceId() {
-		return this.getSentences().get(0);
-	}
-	public void setSentenceId(String sentenceId) {
-		this.getSentences().set(0, sentenceId);
-	}*/
 
 	@Override
 	public String toString() {

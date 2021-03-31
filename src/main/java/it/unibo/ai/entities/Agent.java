@@ -29,7 +29,7 @@ public class Agent {
 		super();
 		this.name = name;
 		this.agentBeliefCollection = agentBeliefCollection;
-		//this.pb = new ProgramBuilder<Object>().add(new File(rulefile));
+		//	System.err.println(this.agentBeliefCollection);
 		this.pb = new ProgramBuilder<Object>();
 		rulefiles.forEach(x -> pb.add(new File(x)));
 		this.reasoningMode = reasoningMode;

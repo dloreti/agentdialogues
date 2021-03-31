@@ -154,20 +154,10 @@ public class ReplayPreferredAllUtteringStrategy implements IUtteringStrategy{
 				String s = handler.remove(0);
 				utters.add(s);
 				handler.add(s); //insert what uttered at the end of the list
-				//System.out.println("i="+i+" handler becomes:"+handler);
 				i++;
 			}
 			
 		}
-		/*int min = (maxUtterablePerTurn<handler.size() ? maxUtterablePerTurn : handler.size()) ;
-		System.out.println("maxUtterablePerTurn="+maxUtterablePerTurn+" handler.size()="+handler.size()+" min="+min);
-		while (i<min) {
-			String s = handler.remove(0);
-			utters.add(s);
-			handler.add(s); //insert what uttered at the end of the list
-			System.out.println("i="+i+" handler becomes:"+handler);
-			i++;
-		}*/
 		
 		logger.debug("Ordered list of utterables AFTER uttering: "+handlerListToString());
 

@@ -5,6 +5,9 @@
  acc(X) :- bel(X). % accessible if believed to be true
  acc(X) :- und(X). % accessible if understood
 
+ acc(Y) :- arg(X,Y,_), bel(X), get(Y,A), und(A). 
+ %whenever an agent can get a reasoning Y from another argument A, Y is made accessible if its premise is believed
+
  con(Z,W) :- con(W,Z). % conflict is symmetric
  :- con(Z,Z). % conflict is irreflexive
 
@@ -17,7 +20,6 @@
 -app(Y,because(U)) :- arg(X,Y,Z), arg(XX,YY,ZZ), bel(XX), app(YY), def(YY,U,Y), app(U). 
 % a possible reason that makes a reasoning Y not applicable is that Y is defeated (undercut) 
 % by an applicable argument U whose premise YY is another argument that is applicable
-%% (if this explanation is not clear, don't worry - ask us, it's not obvious)
   
  bel(X) :- arg(X,Y,Z), acc(X), not -bel(X). % by default, believe premises 
  bel(X) :- der(X), not -bel(X). % by default, believe what you derive
@@ -34,3 +36,37 @@ undercut(Y,because(U)) :- und(Y), arg(_,Y,_), -app(Y,because(U)).
 % produce an undercutting argument U against a reasoning Y that you have understood from communication, 
 % if U is a possible reason that makes Y not applicable
 
+
+% TASK-SPECIFIC KNOWLEDGE B&B
+% structure of arguments (fixed for the example, same for all agents)
+%con(b,c).
+%arg(i,e,b).
+%arg(i,d,c).
+%arg(i,f,a).
+%def(d,u,e).
+
+% AGENT-SPECIFIC KNOWLEDGE X
+%acc(i).
+%acc(e).
+%und(a).
+
+% AGENT-SPECIFIC KNOWLEDGE X'
+%acc(i).
+%acc(e).
+%get(d,a).
+%%and she is told 
+%und(a).
+
+% TASK-SPECIFIC KNOWLEDGE P&L
+% structure of arguments (fixed for the example, same for all agents)
+%arg(i,f,a). 
+%arg(i,e,b). 
+%con(a,b).
+%def(f,u,e). 
+
+% AGENT-SPECIFIC KNOWLEDGE X'
+%acc(i).
+%acc(e).
+%get(f,a).
+%and she is told 
+%und(a).

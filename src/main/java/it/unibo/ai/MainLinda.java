@@ -28,6 +28,7 @@ import it.unibo.ai.beliefobjects.Belief;
 import it.unibo.ai.beliefobjects.Believed;
 import it.unibo.ai.beliefobjects.Defeater;
 import it.unibo.ai.beliefobjects.Derived;
+import it.unibo.ai.beliefobjects.Get;
 import it.unibo.ai.beliefobjects.NotBelieved;
 import it.unibo.ai.beliefobjects.Rebut;
 import it.unibo.ai.beliefobjects.Undercut;
@@ -60,7 +61,7 @@ public class MainLinda  {
 		
 		int maxUtterablePerTurn = 1;
 		int maxGiveAndTake = 0;
-		Dialogue.CONDITION condition = Dialogue.CONDITION.SILENT; // Dialogue.CONDITION.DISCUSS; // 
+		Dialogue.CONDITION condition = Dialogue.CONDITION.DISCUSS; // Dialogue.CONDITION.SILENT; //  
 		
 
 		ProblemSentences ps = new LindaSentences(LindaSentences.ORDERING.CONCLUSION_FIRST);
@@ -81,12 +82,13 @@ public class MainLinda  {
 				.add(Rebut.class)
 				.add(Undercut.class)
 				.add(Because.class)
-				.add(Believed.class);
-				/*.add(Argument.class)
+				.add(Believed.class)
+				.add(Get.class)
+				.add(Argument.class)
 				.add(Conflict.class)
 				.add(Defeater.class)
 				.add(Derived.class)
-				.add(NotBelieved.class);*/
+				.add(NotBelieved.class);
 
 		/************ AGENTS ****************/
 		MersenneTwisterFast r = new MersenneTwisterFast();
@@ -95,6 +97,8 @@ public class MainLinda  {
 		ArrayList<Belief>  x_i_acc = new ArrayList<Belief>(); 
 		x_i_acc.add(new Accessible("e")); 
 		x_i_acc.add(new Accessible("i"));
+		// newly added support to discoverable arguments
+		x_i_acc.add(new Get("f", "a"));
 		ArrayList<Belief>  y_i_acc = new ArrayList<Belief>(); 
 		y_i_acc.add(new Accessible("f")); 
 		y_i_acc.add(new Accessible("i"));
@@ -110,7 +114,7 @@ public class MainLinda  {
 		agentTypes.add("Y");
 		agentTypes.add("Z");
 
-
+		
 		IUtteringStrategy utteringStrategyA = null;
 		IUnderstandingStrategy understandingStrategyA = null;
 		IUtteringStrategy utteringStrategyB = null;
