@@ -41,7 +41,7 @@ Then, you have to download/clone the asp4j project from [here](https://github.co
 ```
 $ cd asp4j  # switch to the main folder of the project
 $ mvn clean install -Dmaven.test.skip=true # to install the asp4j project into your local maven repo, so that the correspondent dependency in agentdialogues/pom.xml can be resolved. We suggest to skip asp4j's tests because they check the availability of other ASP solvers, like dlv, in your system.
-
+```
 
 ### Download or clone this project
 After downloading/cloning this project, you can compile `agentdialogues` through maven again:
