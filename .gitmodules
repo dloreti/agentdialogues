@@ -1,3 +1,0 @@
-[submodule "lib/asp4j"]
-	path = lib/asp4j
-	url = https://github.com/hbeck/asp4j.git

@@ -4,6 +4,11 @@ Argumentative agents interacting to solve the Bat & Ball problem:
 
 "A bat and a ball cost $1.10 in total. The bat costs $1 more than the ball. How much does the ball cost? ___ cents."
 
+and the Paul & Linda problem:
+
+"Paul is looking at Linda and Linda is looking at John. Paul is married but John is not married. Is a person who is married looking at a person who is not married?"
+
+
 ### Before downloading/cloning
 
 agentdialogues uses the project [asp4j](https://github.com/hbeck/asp4j) as a java interface to [clingo](http://potassco.sourceforge.net).
@@ -32,20 +37,19 @@ Copyright (C) Benjamin Kaufmann
 License: The MIT License <https://opensource.org/licenses/MIT>
 ```
 
+Then, you have to download/clone the asp4j project from [here](https://github.com/hbeck/asp4j) and do the following:
+```
+$ cd asp4j  # switch to the main folder of the project
+$ mvn clean install -Dmaven.test.skip=true # to install the asp4j project into your local maven repo, so that the correspondent dependency in agentdialogues/pom.xml can be resolved. We suggest to skip asp4j's tests because they check the availability of other ASP solvers, like dlv, in your system.
+
 
 ### Download or clone this project
-After downloading/cloning this project, you need to do the following:
+After downloading/cloning this project, you can compile `agentdialogues` through maven again:
 ```
 $ cd agentdialogues  # switch to the main folder of the project
-$ git submodule update --init --recursive  # to actually download the code of asp4j project. Now you should find the asp4j sources in the lib folder as a git submodule. 
-$ cd lib/asp4j
-$ mvn install  -Dmaven.test.skip=true # to install the asp4j project into your local maven repo, so that the correspondent dependency in agentdialogues/pom.xml can be resolved. We suggest to skip asp4j's tests because they check the availability of other ASP solvers, like dlv, in your system.
-```
-
-Now you can compile `agentdialogues` through maven again:
-```
-$ cd agentdialogues  # switch to the main folder of the project
-$ mvn package  
+$ mvn clean package # to create a jar of the agentdialogues project
+# OR
+$ mvn clean install # to install the agentdialogues project into your local maven repo
 ```
 
 #### Eclispe and MacOS users
