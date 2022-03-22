@@ -17,6 +17,8 @@ public abstract class ProblemSentences {
 	private Comparator<String> sentenceComparator;
 	
 	protected List<String> possibleAnswers;
+	private List<String> rulefiles;
+	
 	
 	public ProblemSentences() {
 		this.setSentenceComparator(new Comparator<String>(){
@@ -71,5 +73,13 @@ public abstract class ProblemSentences {
 	public abstract String checkStopTalking(Agent a1, Agent a2, Dialogue.CONDITION condition);
 
 	public abstract AgentType checkAgentType(Agent a);
+
+	public List<String> getRulefiles() {
+		return rulefiles;
+	}
+
+	public void setRulefiles(List<String> rulefiles) {
+		this.rulefiles = rulefiles;
+	}
 	
 }

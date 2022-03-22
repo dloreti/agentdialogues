@@ -29,7 +29,6 @@ public class Agent {
 		super();
 		this.name = name;
 		this.agentBeliefCollection = agentBeliefCollection;
-		//	System.err.println(this.agentBeliefCollection);
 		this.pb = new ProgramBuilder<Object>();
 		rulefiles.forEach(x -> pb.add(new File(x)));
 		this.reasoningMode = reasoningMode;
@@ -64,12 +63,11 @@ public class Agent {
 	}
 	
 	public void think() throws SolverException{
+				
 		this.agentBeliefCollection.resetToAccessibleAndUndestood();
 		for (Belief b : agentBeliefCollection.getBelieves()) {
 			pb.add(b);
 		}
-		//pb.build().getInput().forEach(x -> {System.out.println(((Belief)x));});
-		
 		Set<Object> consequence = solver.getConsequence(pb.build(), reasoningMode, filter);
 		//we clear the belief collection although it only contains some facts (acc and und) which must be still present in the consequence set just computed.
 		agentBeliefCollection.clearBelieves(); 

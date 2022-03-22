@@ -67,9 +67,9 @@ public class MainLinda  {
 		ProblemSentences ps = new LindaSentences(LindaSentences.ORDERING.CONCLUSION_FIRST);
 		ps.buildExample();
 
-		List<String> rulefiles = new ArrayList<>();
+		/*List<String> rulefiles = new ArrayList<>();
 		rulefiles.add(MainBB.class.getResource("/bk.lp").getPath());
-		rulefiles.add(MainBB.class.getResource("/linda.lp").getPath());
+		rulefiles.add(MainBB.class.getResource("/linda.lp").getPath());*/
 				
 		ObjectSolver solver = new ObjectSolverImpl(new SolverClingo());
 
@@ -142,13 +142,13 @@ public class MainLinda  {
 						new AgentBeliefCollection( (ArrayList<Belief>)possible_i_acc.get(i).clone(),
 								utteringStrategyA,
 								understandingStrategyA),
-						rulefiles, ReasoningMode.CAUTIOUS, filter, solver
+						ps.getRulefiles(), ReasoningMode.CAUTIOUS, filter, solver
 						);
 				Agent Two = new Agent("A2",//agentTypes.get(j)+"2", 
 						new AgentBeliefCollection( (ArrayList<Belief>) possible_i_acc.get(j).clone(),
 								utteringStrategyB,
 								understandingStrategyB),
-						rulefiles, ReasoningMode.CAUTIOUS, filter, solver
+						ps.getRulefiles(), ReasoningMode.CAUTIOUS, filter, solver
 						);
 				try {
 					logger.info("*********** DIALOGUE "+One.getName()+"[Type="+agentTypes.get(i)+"] - "+Two.getName()+"[Type="+agentTypes.get(j)+"] :");

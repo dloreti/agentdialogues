@@ -1,8 +1,10 @@
 package it.unibo.ai.entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import it.unibo.ai.MainBB;
 import it.unibo.ai.beliefobjects.Applicable;
 import it.unibo.ai.beliefobjects.Belief;
 import it.unibo.ai.beliefobjects.Believed;
@@ -23,6 +25,15 @@ public class BatBallSentences extends ProblemSentences{
 			ORDERED_ENTRIES=ARGUMENT_FIRST_ORDERING;
 		else
 			ORDERED_ENTRIES=CONCLUSION_FIRST_ORDERING;
+		List<String> rulefiles = new ArrayList<>();
+		rulefiles.add(MainBB.class.getResource("/bk.lp").getPath()); 
+		rulefiles.add(MainBB.class.getResource("/batball.lp").getPath());
+		this.setRulefiles(rulefiles);
+	}
+	
+	public BatBallSentences(ORDERING ordering, List<String> rulefiles) {
+		this(ordering);
+		this.setRulefiles(rulefiles);
 	}
 
 	public void buildExample(){

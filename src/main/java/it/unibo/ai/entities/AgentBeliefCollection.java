@@ -29,7 +29,7 @@ public class AgentBeliefCollection {
 
 	public AgentBeliefCollection(List<Belief> believes, IUtteringStrategy utteringStrategy, IUnderstandingStrategy undestandingStrategy ) {
 		super();
-		this.setBelieves(believes);
+		this.setBelieves(believes);        
 		this.utteringStrategy = utteringStrategy;
 		this.undestandingStrategy = undestandingStrategy;
 		//this.setJustUttered(new ArrayList<String>());

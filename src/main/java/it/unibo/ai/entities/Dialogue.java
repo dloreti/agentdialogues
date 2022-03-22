@@ -38,10 +38,10 @@ public class Dialogue {
 
 	private void silenceDialogue() throws SolverException{
 		Logger logger = LogManager.getLogger("agentdialogues");
-		logger.debug("before "+agent1.getName()+" thinks: "+agent1);
+		//logger.debug("before "+agent1.getName()+" thinks: "+agent1);
 		agent1.think();
 		logger.info("Beginning "+agent1.getName()+" Type="+ps.checkAgentType(agent1)+" thinks: "+agent1+ " claims: "+ps.getAgentClaimNL(agent1));
-		logger.debug("before "+agent2.getName()+" thinks: "+agent2);
+		//logger.debug("before "+agent2.getName()+" thinks: "+agent2);
 		agent2.think();
 		logger.info("Beginning "+agent2.getName()+" Type="+ps.checkAgentType(agent2)+" thinks: "+agent2+ " claims: "+ps.getAgentClaimNL(agent2));
 
