@@ -53,17 +53,13 @@ public class MainBB  {
 		Configurator.setLevel("agentdialogues", Level.INFO);
 
 		
-		int maxUtterablePerTurn = 2;
-		int maxGiveAndTake = 0;
-		Dialogue.CONDITION condition = Dialogue.CONDITION.SILENT; // Dialogue.CONDITION.DISCUSS; // 
+		int maxUtterablePerTurn = 1;
+		int maxGiveAndTake = 10;
+		Dialogue.CONDITION condition = Dialogue.CONDITION.DISCUSS; // Dialogue.CONDITION.SILENT; // 
 		
 
 		ProblemSentences ps = new BatBallSentences(BatBallSentences.ORDERING.CONCLUSION_FIRST);
 		ps.buildExample();
-
-		/*List<String> rulefiles = new ArrayList<>();
-		rulefiles.add(MainBB.class.getResource("/bk.lp").getPath());
-		rulefiles.add(MainBB.class.getResource("/batball.lp").getPath());*/
 		
 		ObjectSolver solver = new ObjectSolverImpl(new SolverClingo());
 
@@ -143,7 +139,7 @@ public class MainBB  {
 						);
 				try {
 					logger.info("*********** DIALOGUE "+One.getName()+"[Type="+agentTypes.get(i)+"] - "+Two.getName()+"[Type="+agentTypes.get(j)+"] :");
-					Dialogue d = new Dialogue(condition,One,Two,maxGiveAndTake,ps);
+					Dialogue d = new Dialogue(condition,One,Two,maxGiveAndTake,ps,r);
 					d.startDialogue();
 					logger.info("DIALOGUE ENDS WITH "+One.getName()+"[Type="+ps.checkAgentType(One)+"] - "+Two.getName()+"[Type="+ps.checkAgentType(Two)+"] :");
 				} catch (SolverException e) {

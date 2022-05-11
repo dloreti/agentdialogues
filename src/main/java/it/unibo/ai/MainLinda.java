@@ -66,10 +66,6 @@ public class MainLinda  {
 
 		ProblemSentences ps = new LindaSentences(LindaSentences.ORDERING.CONCLUSION_FIRST);
 		ps.buildExample();
-
-		/*List<String> rulefiles = new ArrayList<>();
-		rulefiles.add(MainBB.class.getResource("/bk.lp").getPath());
-		rulefiles.add(MainBB.class.getResource("/linda.lp").getPath());*/
 				
 		ObjectSolver solver = new ObjectSolverImpl(new SolverClingo());
 
@@ -152,7 +148,7 @@ public class MainLinda  {
 						);
 				try {
 					logger.info("*********** DIALOGUE "+One.getName()+"[Type="+agentTypes.get(i)+"] - "+Two.getName()+"[Type="+agentTypes.get(j)+"] :");
-					Dialogue d = new Dialogue(condition,One,Two,maxGiveAndTake,ps);
+					Dialogue d = new Dialogue(condition,One,Two,maxGiveAndTake,ps,r);
 					d.startDialogue();
 					logger.info("DIALOGUE ENDS WITH "+One.getName()+"[Type="+ps.checkAgentType(One)+"] - "+Two.getName()+"[Type="+ps.checkAgentType(Two)+"] :");
 				} catch (SolverException e) {
